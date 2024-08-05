@@ -423,21 +423,21 @@
                         <br>
                         <div class="text-medium text-bold w-100 mb-5">
                             <div class="float-left" style="width: 20px; height: 20px;">
-                                <img class="mt-10" src="{{ asset('assets/images/phone.jpg') }}" style="width: 100%;" alt="logo">
+                                <img class="" src="{{ asset('assets/images/phone.jpg') }}" style="width: 100%;" alt="logo">
                             </div> 
                             <div class="float-right w-93">980-983-483</div>
                         </div>
                         <br>
                         <div class="text-medium text-bold w-100 mb-5">
                             <div class="float-left" style="width: 20px; height: 20px;">
-                                <img class="mt-10" src="{{ asset('assets/images/email.jpg') }}" style="width: 100%;" alt="logo">
+                                <img class="" src="{{ asset('assets/images/email.jpg') }}" style="width: 100%;" alt="logo">
                             </div> 
                             <div class="float-right w-93">Booking@cargaglobalperu.com</div>
                         </div>
                         <br>
                         <div class="text-medium text-bold w-100 mb-5">
                             <div class="float-left" style="width: 20px; height: 20px;">
-                                <img class="mt-10" src="{{ asset('assets/images/web_icon.jpg') }}" style="width: 100%;" alt="logo">
+                                <img class="" src="{{ asset('assets/images/web_icon.jpg') }}" style="width: 100%;" alt="logo">
                             </div> 
                             <div class="float-right w-93">www.cargaglobalperu.com</div>
                         </div>
@@ -492,7 +492,7 @@
 
                         <div class="float-left w-100 text-justify">
                             <div class="float-right" style="width: 65px; height: 65px; margin-right: 200px;">
-                                <img class="mt-10" src="{{ asset('assets/images/ship_icon.jpg') }}" style="width: 100%;" alt="logo">
+                                <img src="{{ asset('assets/images/ship_icon.jpg') }}" style="width: 100%;" alt="logo">
                             </div>
                             <div class="text-bold w-100 fs-20">
                                 <div class="float-left text-left" style="margin-left: 90px">
@@ -767,7 +767,7 @@
     </div>
 
     <div class="w-100" style="height: 111px">
-        <img class="mt-10" src="{{ asset('assets/images/footer_image.jpg') }}" style="width: 100%;" alt="logo">
+        <img src="{{ asset('assets/images/footer_image.jpg') }}" style="width: 100%;" alt="logo">
     </div>
 
     <div class="w-100" style="clear: both"></div>
