@@ -427,7 +427,7 @@
                     </td>
                     <td class="w-35">
                         <div class="float-right br-red" style="width: 160px; height: 160px;">
-                            <img src="{{ asset('images/logo.jpg') }}" alt="logo">
+                            <img src="{{ asset('assets/images/logo.jpg') }}" alt="logo">
                         </div>
                     </td>
                 </tr>
