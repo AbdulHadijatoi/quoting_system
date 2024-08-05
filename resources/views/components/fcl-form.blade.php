@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="mb-2">
             <label for="unidad_de_medida_teu" class="form-label">Unidad de medida TEU</label>
-            <select class="form-control" id="unidad_de_medida_teu" name="unidad_de_medida_teu" required>
+            <select class="form-control" id="unidad_de_medida_teu" name="unidad_de_medida_teu">
                 <option value="20">20 ST</option>
                 <option value="40">40 ST/HQ</option>
                 <option value="40">40 NOR</option>
@@ -10,18 +10,18 @@
         </div>
         <div class="mb-2">
             <label for="precio_factura" class="form-label">Precio de la factura (USD):</label>
-            <input type="text" class="form-control" id="precio_factura" name="precio_factura" required>
+            <input type="text" class="form-control" id="precio_factura" name="precio_factura">
         </div>
         <div class="mb-2">
             <label for="primera_importacion" class="form-label">Primera importación</label>
-            <select class="form-control" id="primera_importacion" name="primera_importacion" required>
+            <select class="form-control" id="primera_importacion" name="primera_importacion">
                 <option value="SI">SI</option>
                 <option value="NO">NO</option>
             </select>
         </div>
         <div class="mb-2">
             <label for="incoterm" class="form-label">Incoterm</label>
-            <select class="form-control" id="incoterm" name="incoterm" required>
+            <select class="form-control" id="incoterm" name="incoterm">
                 <option value="FOB">FOB</option>
             </select>
         </div>
@@ -30,7 +30,7 @@
 
         <div class="mb-2">
             <label for="tipo_mercancia" class="form-label">Tipo de mercancía:</label>
-            <select class="form-control" id="tipo_mercancia" name="tipo_mercancia" required>
+            <select class="form-control" id="tipo_mercancia" name="tipo_mercancia">
                 <optgroup label="Maquinaria">
                     <option value="Maquinaria">Tractores agricolas</option>
                     <option value="Maquinaria">Maquinaria de linea amarilla</option>
@@ -99,7 +99,7 @@
         
         <div class="mb-2">
             <label for="puerto_origen" class="form-label">Puerto de origen (POL)</label>
-            <select class="form-control" id="puerto_origen" name="puerto_origen" required>
+            <select class="form-control" id="puerto_origen" name="puerto_origen">
                 <option value="QINGDAO">Qingdao - (QINGDAO)</option>
                 <option value="SHENZHEN">Shenzhen - (SHENZHEN)</option>
                 <option value="SHANGHAI">Shanghai - (SHANGHAI)</option>
@@ -111,7 +111,7 @@
         
         <div class="mb-2">
             <label for="ubicacion_destino" class="form-label">Ubicación en Perú</label>
-            <select class="form-control" id="ubicacion_destino" name="ubicacion_destino" required>
+            <select class="form-control" id="ubicacion_destino" name="ubicacion_destino">
                 <optgroup label="ZONA 1">
                     <option value="zone1">Callao</option>
                     <option value="zone1">Carmen de La Legua</option>

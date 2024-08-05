@@ -426,7 +426,9 @@
                         <div class="text-medium text-bold w-100 mb-5"><div class="br-blue float-left" style="width: 20px; height: 20px;"></div> <div class="float-right w-93">www.cargaglobalperu.com</div></div><br>
                     </td>
                     <td class="w-35">
-                        <div class="float-right br-red" style="width: 160px; height: 160px;"></div>
+                        <div class="float-right br-red" style="width: 160px; height: 160px;">
+                            <img src="{{ asset('images/logo.jpg') }}" alt="logo">
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -744,8 +746,59 @@
         <div class="w-100" style="clear: both"></div>
     </div>
 
-
     <div class="br-red w-100" style="height: 111px">
+        {{-- FOOTER IMAGE HERE --}}
+    </div>
+
+    <div class="w-100" style="clear: both"></div>
+    {{-- SECOND PAGE --}}
+    <div class="container mt-10">
+        <div class="br-black w-100 mt-10 mb-7" style="clear: both"></div>
+        <h1 class="mb-10 color-heading">¡Gracias por embarcar con Carga Global!</h1>
+        
+        <div class="w-100 mt-10 text-large text-bold">
+            Información de cuentas bancarias
+        </div>
+        <div class="w-100 mt-10 text-large text-bold">
+            Corriente dolares Interbank:
+        </div>
+        <div class="w-100 text-large">
+            200-3004504779 CCI 003-200-003004504779-39
+        </div>
+        <div class="w-100 text-large text-bold">
+            Corriente soles Interbank:
+        </div>
+        <div class="w-100 text-large">
+            200-3004504761 CCI 003-200-003004504761-37
+        </div>
+        <div class="w-100 text-large text-bold">
+            Cta Cte. en dólares BBVA Continental:
+        </div>
+        <div class="w-100 text-large">
+            001108320200531993 CCI:01183200020053199330
+        </div>
+        <div class="w-100 text-large text-bold">
+            Cta Cte. en Soles BBVA Continental:
+        </div>
+        <div class="w-100 text-large mb-10">
+            Soles: 001108320200563275 CCI:01183200020056327533
+        </div>
+        
+        <h1 class="mb-10 mt-10">Términos y condiciones</h1>
+        
+        <div class="w-100 text-large mt-10">
+            1-<span class="text-red">Tarifas sujetas a disponibilidad de espacio y equipo.</span><br>
+            2-<span class="text-red">Aplica para carga general, apilable, no sobredimensionada.</span><br>
+            3-<span class="text-red">De existir alguna variación en los detalles de la carga (peso y/o volumen) se revisarán
+            los costos.</span><br>
+            4-<span class="text-red">El transporte interno, no incluye estiba o desestiba, tampoco custodia.</span><br>
+            5-<span class="text-red">El monto de los impuestos debe ser abonado a la cuenta de la agencia de aduana en
+            soles al t.c. del dia de sunat.</span><br>
+            6-<span class="text-red">Debido a la coyuntura actual en el Transporte Marítimo Internacional, los tránsitos
+            directos pueden estar sujetos a cambios y hacer conexión en puertos intermedios sin
+            previo aviso.</span><br>
+            7-<span class="text-red">Verificar siempre la validez de la cotización brindada, ya que se actualiza terminado la validez</span>
+        </div>
     </div>
 </body>
 </html>

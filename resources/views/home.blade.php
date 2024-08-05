@@ -92,7 +92,7 @@
                     </ul>
                     
                     <div class="tab-content p-4">
-                        <form id="step2" action="{{ url('generate-pdf') }}" class="tab-pane active" role="tabpanel" aria-labelledby="step2-tab" method="GET">
+                        <form id="step2" action="{{ url('generate-pdf') }}" class="tab-pane active" role="tabpanel" aria-labelledby="step2-tab" method="POST">
                             @csrf
                             <h4 class="mb-3">Details of your Loose Cargo (LCL)</h4>
 
@@ -101,7 +101,7 @@
                             <button type="submit" class="btn btn-primary btn-block full-width mt-3">Calcular</button>
                         </form>
 
-                        <form id="step3" class="tab-pane" role="tabpanel" aria-labelledby="step3-tab" method="POST">
+                        <form id="step3" action="{{ url('generate-pdf') }}" class="tab-pane" role="tabpanel" aria-labelledby="step3-tab" method="POST">
                             @csrf
                             <h4 class="mb-3">Details of your cargo (FCL)</h4>
 

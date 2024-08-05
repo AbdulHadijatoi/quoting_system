@@ -5,17 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 
-class PDFController extends Controller
-{
-    public function showPDFView()
-    {
-        return view('pdf_view');
-    }
+class PDFController extends Controller {
 
-    public function generatePDF()
-    {
-        $data = []; // Any dynamic data you need to pass to the view
-        $pdf = PDF::loadView('pdf_view', $data);
-        return $pdf->stream('document.pdf');
+    public function generatePDF() {
+        $data = [];
+        $pdf = PDF::loadView('pdf.quotation-form', $data);
+        return $pdf->stream('quotation_'.now().'.pdf');
     }
 }
