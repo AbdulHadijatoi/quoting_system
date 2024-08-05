@@ -5,27 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get a Quote</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('/path-to-your-background-image') no-repeat center center fixed;
+            background: linear-gradient(to right, navy, transparent), url({{ asset('assets/images/front_bg.jpeg') }}) no-repeat center center fixed;
             background-size: cover;
         }
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
+
+        .quote-form {
+            max-width: 600px;
             background: #fff;
-            border-radius: 10px;
+            border-radius: 25px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            padding: 20px;
+            padding: 25px;
+            margin: 0 auto;
         }
+
         .btn-primary {
             background-color: #0056b3;
             border-color: #0056b3;
         }
         .btn-primary:hover {
             background-color: #004494;
-            border-color: #004494;
+        }
+        .tab-content {
+            border-left: 1px solid rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            border-top: 0px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-radius: 0px 0px 15px 15px;
         }
         .tab-content > .tab-pane {
             display: none;
@@ -33,124 +42,77 @@
         .tab-content > .active {
             display: block;
         }
+        .text-navy {
+            color: navy;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .nav-link {
+            color: black;
+            font-weight: 500;
+        }
+
+        .form-label {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+        <div class="row align-items-center w-100">
+            <div class="col-md-6 text-white p-4">
+                <h3>Online quoting tool</h3>
+                <h1>Looking for a cargo fare quick and easy?</h1>
+                <p>Just as if it were a plane ticket, book your import and additional services.</p>
             </div>
-        @endif
 
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
+            <div class="col-md-6 d-flex justify-content-center">
+                <div class="quote-form">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
-        <h2>Get a Quote in 3 Simple Steps</h2>
-        <ul class="nav nav-tabs" id="quoteFormTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="step1-tab" data-bs-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="true">Step 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="step2-tab" data-bs-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false">Step 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="step3-tab" data-bs-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false">Step 3</a>
-            </li>
-        </ul>
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
-        <form id="quoteForm" action="{{ route('quote.submit') }}" method="POST">
-            @csrf
-            <div class="tab-content">
-                <!-- Step 1 -->
-                <div id="step1" class="tab-pane active" role="tabpanel" aria-labelledby="step1-tab">
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="ruc" class="form-label">RUC / DNI</label>
-                        <input type="text" class="form-control" id="ruc" name="ruc" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-block" onclick="nextStep(2)">Next</button>
-                </div>
+                    <h2 class="my-4">Quote your imports</h2>
+                    <ul class="nav nav-tabs" id="quoteFormTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="step2-tab" data-bs-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false">Carga suelta (LCL)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="step3-tab" data-bs-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false">Contenedor(es) (FCL)</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content p-4">
+                        <form id="step2" action="{{ url('generate-pdf') }}" class="tab-pane active" role="tabpanel" aria-labelledby="step2-tab" method="GET">
+                            @csrf
+                            <h4 class="mb-3">Details of your Loose Cargo (LCL)</h4>
 
-                <!-- Step 2 -->
-                <div id="step2" class="tab-pane" role="tabpanel" aria-labelledby="step2-tab">
-                    <h3>Consolidated Load</h3>
-                    <div class="mb-3">
-                        <label for="volume" class="form-label">Volume</label>
-                        <input type="text" class="form-control" id="volume" name="volume" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="incoterm" class="form-label">Incoterm</label>
-                        <select class="form-control" id="incoterm" name="incoterm" required>
-                            <option value="FOB">FOB</option>
-                            <option value="CIF">CIF</option>
-                            <option value="EXW">EXW</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pol" class="form-label">Port of Origin (POL)</label>
-                        <select class="form-control" id="pol" name="pol" required>
-                            <option value="Shanghai - (CNSHA)">Shanghai - (CNSHA)</option>
-                            <option value="Ningbo - (CNNGB)">Ningbo - (CNNGB)</option>
-                            <option value="Shenzhen - (CNSZX)">Shenzhen - (CNSZX)</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="firstImport" class="form-label">Have you imported before?</label>
-                        <input type="text" class="form-control" placeholder="Yes or No" id="secondImport" name="secondImport">
-                    </div>
-                    <div class="mb-3">
-                        <label for="typeOfGoods" class="form-label">Type of Goods</label>
-                        <select class="form-control" id="typeOfGoods" name="typeOfGoods" required>
-                            <option value="General Cargo">General Cargo</option>
-                            <option value="Machinery">Machinery</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-secondary btn-block" onclick="previousStep(1)">Previous</button>
-                    <button type="button" class="btn btn-primary btn-block" onclick="nextStep(3)">Next</button>
-                </div>
+                            @include('components.lcl-form')
+                            
+                            <button type="submit" class="btn btn-primary btn-block full-width mt-3">Calcular</button>
+                        </form>
 
-                <!-- Step 3 -->
-                <div id="step3" class="tab-pane" role="tabpanel" aria-labelledby="step3-tab">
-                    <h3>Container-FCL</h3>
-                    <div class="mb-3">
-                        <label for="equipment" class="form-label">Equipment</label>
-                        <select class="form-control" id="equipment" name="equipment" required>
-                            <option value="20 Standard">20 Standard</option>
-                            <option value="40 HQ">40 HQ</option>
-                        </select>
+                        <form id="step3" class="tab-pane" role="tabpanel" aria-labelledby="step3-tab" method="POST">
+                            @csrf
+                            <h4 class="mb-3">Details of your cargo (FCL)</h4>
+
+                            @include('components.fcl-form')
+                            
+                            <button type="submit" class="btn btn-primary btn-block full-width mt-3">Calcular</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="incotermFCL" class="form-label">Incoterm</label>
-                        <select class="form-control" id="incotermFCL" name="incotermFCL" required>
-                            <option value="FOB">FOB</option>
-                            <option value="CIF">CIF</option>
-                            <option value="EXW">EXW</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="polFCL" class="form-label">Port of Origin (POL)</label>
-                        <select class="form-control" id="polFCL" name="polFCL" required>
-                            <option value="Shanghai - (CNSHA)">Shanghai - (CNSHA)</option>
-                            <option value="Ningbo - (CNNGB)">Ningbo - (CNNGB)</option>
-                            <option value="Shenzhen - (CNSZX)">Shenzhen - (CNSZX)</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-secondary btn-block" onclick="previousStep(2)">Previous</button>
-                    <button type="submit" class="btn btn-primary btn-block">Send Quote</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <script>

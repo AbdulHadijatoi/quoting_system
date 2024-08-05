@@ -16,6 +16,6 @@ class PDFController extends Controller
     {
         $data = []; // Any dynamic data you need to pass to the view
         $pdf = PDF::loadView('pdf_view', $data);
-        return $pdf->download('document.pdf');
+        return $pdf->stream('document.pdf');
     }
 }
