@@ -12,16 +12,20 @@ class LoginController extends BaseController
 {
     public function login(Request $request): JsonResponse
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) { 
             $user = Auth::user(); 
-            $success['token'] =  $user->createToken('QuoteApp')->plainTextToken; 
-            $success['user'] =  $user;
-   
+            $token = $user->createToken('QuoteApp')->plainTextToken; 
+        
+            // Adding the token directly inside the user object
+            $user->token = $token;
+        
+            $success['user'] = $user;
+           
             return $this->sendResponse($success, 'User login successfully.');
         } 
-        else{ 
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
-        } 
+        else { 
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+        }        
     }
 
     public function logout(Request $request)
