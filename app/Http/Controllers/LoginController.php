@@ -15,12 +15,22 @@ class LoginController extends BaseController
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
             $user = Auth::user(); 
             $success['token'] =  $user->createToken('QuoteApp')->plainTextToken; 
-            $success['name'] =  $user->name;
+            $success['user'] =  $user;
    
             return $this->sendResponse($success, 'User login successfully.');
         } 
         else{ 
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
+    }
+
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the current request
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logout successful',
+        ]);
     }
 }
