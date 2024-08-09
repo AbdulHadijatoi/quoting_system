@@ -18,7 +18,7 @@ class LoginController extends BaseController
         
             // Adding the token directly inside the user object
             $user->token = $token;
-        
+            $user->role_name = $user->getRoleNames()->first(); // assuming a user has one role
             $success['user'] = $user;
            
             return $this->sendResponse($success, 'User login successfully.');
