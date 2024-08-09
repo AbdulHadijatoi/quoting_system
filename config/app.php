@@ -129,6 +129,7 @@ return [
     
     'providers' => ServiceProvider::defaultProviders()->replace([
         Barryvdh\DomPDF\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
     
     'aliases' => [
