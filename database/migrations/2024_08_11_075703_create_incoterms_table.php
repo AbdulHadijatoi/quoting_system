@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('quote_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('shipping_quote_id')->nullable()->after('volume');
+        Schema::create('incoterms', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('quote_details', function (Blueprint $table) {
-            $table->dropColumn('shipping_quote_id');
-        });
+        Schema::dropIfExists('incoterms');
     }
 };

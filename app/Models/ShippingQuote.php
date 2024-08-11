@@ -9,7 +9,9 @@ class ShippingQuote extends Model
 {
     use HasFactory;
 
-    public function quoteDetails(){
-        return $this->hasOne(QuoteDetail::class, 'shipping_quote_id');
+    protected $guarded = [];
+
+    public function shippingQuoteDetails(){
+        return $this->hasOne(ShippingQuoteDetail::class, 'shipping_quote_id');
     }
 }

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dropdowns', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id')->nullable()->after('option_value');
+        Schema::create('destination_locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('zone_id');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dropdowns', function (Blueprint $table) {
-            $table->dropColumn(['category_id']);
-        });
+        Schema::dropIfExists('destination_locations');
     }
 };
