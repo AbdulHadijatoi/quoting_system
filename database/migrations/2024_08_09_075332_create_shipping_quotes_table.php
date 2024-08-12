@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('guest_address')->nullable();
             $table->string('quote_reference')->unique();
             $table->timestamp('valid_until');
-            $table->decimal('total_cost', 10, 2);
+            $table->decimal('total_cost', 10, 2)->nullable();
             $table->boolean('generated_by_employee')->default(false);
             $table->timestamps();
         });

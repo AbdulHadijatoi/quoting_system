@@ -14,4 +14,25 @@ class ShippingQuoteDetail extends Model
     public function shippingQuote(){
         return $this->belongsTo(ShippingQuote::class,'shipping_quote_id');
     }
+    
+    public function getIncoterm(){
+        return $this->belongsTo(Incoterm::class,'incoterm');
+    }
+    
+    public function measurementUnit(){
+        return $this->belongsTo(MeasurementUnit::class,'measurement_unit');
+    }
+    
+    public function originPort(){
+        return $this->belongsTo(OriginPort::class,'origin_port');
+    }
+    
+    public function merchandiseType(){
+        return $this->belongsTo(MerchandiseType::class,'type_of_merchandise');
+    }
+
+    public function destinationLocation(){
+        return $this->belongsTo(DestinationLocation::class,'destination_location');
+    }
+
 }
