@@ -3,19 +3,17 @@
 use App\Http\Controllers\ConstantDataController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShippingQuoteController;
 use App\Http\Controllers\SubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/generate-pdf', [PDFController::class, 'generatePDF']);
 
-Route::get('get-contstants', [ConstantDataController::class, 'getConstants']);
+Route::get('get-constants', [ConstantDataController::class, 'getConstants']);
 Route::get('subscribers', [SubscriberController::class, 'getSubscribers'])->middleware('auth:sanctum');
 Route::post('subscribers/create', [SubscriberController::class, 'setSubscriber']);
 
@@ -35,4 +33,11 @@ Route::prefix('shipping-quotes')->group(function(){
 
     Route::any('/preview', [ShippingQuoteController::class, 'previewQuote']);
     Route::any('/download', [ShippingQuoteController::class, 'downloadQuote']);
+});
+
+Route::get('get-setting/{key?}', [SettingController::class, 'getSetting']);
+Route::get('get-all-setting', [SettingController::class, 'getAllSetting']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('update-settings', [SettingController::class, 'updateSettings']);
 });
