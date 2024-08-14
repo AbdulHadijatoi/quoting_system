@@ -178,6 +178,16 @@ class QuoteService {
             'dni_ruc_option' => $data['dni_ruc_option'],
             'dni_ruc_value' => $data['dni_or_ruc_value'],
             'validity' => $data['validity'],
+
+            'type_of_merchandise' => $data['type_of_merchandise_name'],
+            'origin_port' => $data['origin_port_name'],
+            'incoterm' => $data['incoterm_name'],
+            'destination_location' => $data['destination_location_name'],
+
+            'volume' => $volume,
+            'total_weight' => $total_weight,
+            'invoice_price' => $invoice_price,
+            'first_import' => $first_import,
         ];
     }
     
@@ -393,6 +403,17 @@ class QuoteService {
             'dni_ruc_option' => $data['dni_ruc_option'],
             'dni_ruc_value' => $data['dni_or_ruc_value'],
             'validity' => $data['validity'],
+
+            'volume' => 0,
+            'total_weight' => 0,
+            'measurement_unit' => $data['measurement_unit_name'],
+            'destination_location' => $data['destination_location_name'],
+            'incoterm' => $data['incoterm_name'],
+            'origin_port' => $data['origin_port_name'],
+            'type_of_merchandise' => $data['type_of_merchandise_name'],
+            'first_import' => $first_import,
+            'invoice_price' => $invoice_price,
+
         ];
     }
 }

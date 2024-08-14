@@ -120,11 +120,16 @@ class ShippingQuoteController extends BaseController {
             'first_import' => 'nullable',
             'type_of_merchandise' => 'nullable|exists:merchandise_types,product_category_id',
             'type_of_merchandise_id' => 'nullable|exists:merchandise_types,id',
+            'type_of_merchandise_name' => 'nullable|exists:merchandise_types,name',
             'origin_port' => 'nullable|exists:origin_ports,code',
+            'origin_port_name' => 'nullable|exists:origin_ports,name',
             'incoterm' => 'nullable|exists:incoterms,code',
+            'incoterm_name' => 'nullable|exists:incoterms,name',
             'destination_location' => 'nullable|exists:destination_locations,zone_id',
             'destination_location_id' => 'nullable|exists:destination_locations,id',
+            'destination_location_name' => 'nullable|exists:destination_locations,name',
             'measurement_unit' => 'nullable|exists:measurement_units,code',
+            'measurement_unit_name' => 'nullable|exists:measurement_units,name',
         ]);
 
         $quote_reference = str()->random(8);
@@ -199,11 +204,11 @@ class ShippingQuoteController extends BaseController {
         $request->merge(['validity' => $expiration_date]);
 
         if($form_tab == 1){
-            return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
-            // return (new QuoteService())->applyLCLFormula($request->all());
+            // return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
+            return (new QuoteService())->applyLCLFormula($request->all());
         }else if($form_tab == 2){
-            return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
-            // return (new QuoteService())->applyFCLFormula($request->all());
+            // return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
+            return (new QuoteService())->applyFCLFormula($request->all());
         }
     }
 
@@ -239,7 +244,6 @@ class ShippingQuoteController extends BaseController {
     }
 
     public function downloadQuote($data = []) {
-        
         try {
             $pdf = PDF::loadView('pdf.shipping_quote', $data);
             return $pdf->download('shipping_quote' . now() . '.pdf');

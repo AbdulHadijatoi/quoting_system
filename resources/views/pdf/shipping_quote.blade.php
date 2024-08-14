@@ -523,8 +523,8 @@
                     <span class="text-bold">Primera importación </span>
                 </div>
                 <div class="float-right w-50">
-                    <span class="text-small">FOB</span><br>
-                    <span class="text-small">LCL</span><br>
+                    <span class="text-small">{{ $incoterm }}</span><br>
+                    <span class="text-small">{{ $form_tab == 1 ? "LCL" : "FCL" }}</span><br>
                     <span class="text-small">Shanghai</span><br>
                     <span class="text-small">Maquinaria pesada</span><br>
                     <span class="text-small">SI</span>
