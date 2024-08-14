@@ -251,7 +251,7 @@ class ShippingQuoteController extends BaseController {
             return $pdf->download('shipping_quote' . now() . '.pdf');
         } catch (\Exception $e) {
             // Log the error or handle it appropriately
-            return response()->json(['error' => 'Unable to generate PDF for download'], 500);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
