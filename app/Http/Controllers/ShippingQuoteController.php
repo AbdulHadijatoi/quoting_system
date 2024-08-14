@@ -103,7 +103,6 @@ class ShippingQuoteController extends BaseController {
     
     
     public function createShippingQuote(Request $request) {
-
         $request->validate([
             'guest_name' => 'required',
             'guest_email' => 'required',

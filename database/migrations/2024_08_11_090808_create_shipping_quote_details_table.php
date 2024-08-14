@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('invoice_price')->nullable()->comment('precio_factura');
             $table->boolean('first_import')->default(false)->comment('primera_importacion');
             $table->foreignId('type_of_merchandise')->constrained('merchandise_types')->onDelete('cascade');
-            $table->foreignId('origin_port')->constrained('origin_ports')->onDelete('cascade');
-            $table->foreignId('incoterm')->constrained('incoterms')->onDelete('cascade');
+            $table->string('origin_port');
+            $table->string('incoterm');
             $table->foreignId('destination_location')->constrained('destination_locations')->onDelete('cascade');
-            $table->foreignId('measurement_unit')->constrained('measurement_units')->onDelete('cascade');
+            $table->string('measurement_unit')->nullable();
             // type_of_merchandise => tipo_mercancia
             // port_of_origin => puerto_origen
             // incoterm => incoterm
