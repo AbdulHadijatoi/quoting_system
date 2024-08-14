@@ -500,8 +500,8 @@
                                     <div class="text-red">Validez</div>
                                 </div>
                                 <div class="float-right">
-                                    <div>02/05/2025</div>
-                                    <div class="text-red">15/05/2025</div>
+                                    <div>{{ now()->format("d/m/Y") }}</div>
+                                    <div class="text-red">{{ \Carbon\Carbon::parse($validity)->format('d/m/Y') }}</div>
                                 </div>
                             </div>
                         </div>
