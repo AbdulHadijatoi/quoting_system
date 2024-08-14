@@ -526,7 +526,7 @@
                     <span class="text-small">{{ $incoterm }}</span><br>
                     <span class="text-small">{{ $form_tab == 1 ? "LCL" : "FCL" }}</span><br>
                     <span class="text-small">{{ $origin_port }}</span><br>
-                    <span class="text-small">{{ {{ $type_of_merchandise }} }}</span><br>
+                    <span class="text-small">{{ $type_of_merchandise }}</span><br>
                     <span class="text-small">{{ $first_import == 1 ? "Yes" : "NO" }}</span>
                 </div>
             </div>
