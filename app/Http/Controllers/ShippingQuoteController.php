@@ -145,10 +145,10 @@ class ShippingQuoteController extends BaseController {
         $measurement_unit = $request->measurement_unit;
 
         $expiration_days = 1;
-        // $setting = Setting::where('key','expiration_days')->first();
-        // if($setting){
-        //     $expiration_days = $setting->value;
-        // }
+        $setting = Setting::where('key','expiration_days')->first();
+        if($setting){
+            $expiration_days = $setting->expiration_days;
+        }
 
         $expiration_date = Carbon::now()->addDays($expiration_days);
         
@@ -196,7 +196,7 @@ class ShippingQuoteController extends BaseController {
             ]
         );
 
-        // $request->request->add(['validity' => $expiration_date]);
+        $request->merge(['validity' => $expiration_date]);
 
         if($form_tab == 1){
             return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
