@@ -147,7 +147,7 @@ class ShippingQuoteController extends BaseController {
         $expiration_days = 1;
         $setting = Setting::where('key','expiration_days')->first();
         if($setting){
-            $expiration_days = $setting->value;
+            $expiration_days = intval($setting->value);
         }
 
         $expiration_date = Carbon::now()->addDays($expiration_days);
