@@ -145,10 +145,10 @@ class ShippingQuoteController extends BaseController {
         $measurement_unit = $request->measurement_unit;
 
         $expiration_days = 1;
-        $setting = Setting::where('key','expiration_days')->first();
-        if($setting){
-            $expiration_days = $setting->value;
-        }
+        // $setting = Setting::where('key','expiration_days')->first();
+        // if($setting){
+        //     $expiration_days = $setting->value;
+        // }
 
         $expiration_date = Carbon::now()->addDays($expiration_days);
         

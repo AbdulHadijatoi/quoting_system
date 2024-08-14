@@ -177,7 +177,7 @@ class QuoteService {
             'address' => $data['guest_address'],
             'dni_ruc_option' => $data['dni_ruc_option'],
             'dni_ruc_value' => $data['dni_or_ruc_value'],
-            'validity' => 123,
+            'validity' => $data['validity'],
         ];
     }
     
@@ -392,7 +392,7 @@ class QuoteService {
             'address' => $data['guest_address'],
             'dni_ruc_option' => $data['dni_ruc_option'],
             'dni_ruc_value' => $data['dni_or_ruc_value'],
-            'validity' => 123,
+            'validity' => $data['validity'],
         ];
     }
 }
