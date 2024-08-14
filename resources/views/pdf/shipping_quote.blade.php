@@ -501,7 +501,7 @@
                                 </div>
                                 <div class="float-right">
                                     <div>{{ now()->format("d/m/Y") }}</div>
-                                    <div class="text-red">{{ $validity->format('d/m/Y') }}</div>
+                                    <div class="text-red">{{ $validity }}</div>
                                 </div>
                             </div>
                         </div>
