@@ -196,7 +196,7 @@ class ShippingQuoteController extends BaseController {
             ]
         );
 
-        $request->merge(['validity' => $expiration_date]);
+        $request->request->add(['validity' => $expiration_date]);
 
         if($form_tab == 1){
             return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
