@@ -668,7 +668,7 @@
                                     <div class="br-black-1px w-77 mt-2" style="margin-left: auto"></div>
                                 </div>
                                 <div class="text-right w-90">
-                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv ${{ $total_final }}</div>
+                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv ${{ number_format($total_final,2) }}</div>
                                 </div>
                                 <div class="br-black-1px w-100 mt-10 mb-3"></div>
                                 <div class="text-center text-small text-red w-100">
@@ -721,7 +721,7 @@
 
                                 <div class="text-large text-bold mt-10">
                                     <span class="w-60 d-inline-block text-center">Total Impuestos</span>
-                                    <span class="w-35 d-inline-block text-center">${{ $impuesto_total_aduanas }}</span>
+                                    <span class="w-35 d-inline-block text-center">${{ number_format($impuesto_total_aduanas,2) }}</span>
                                 </div>
                                 
                                 <div class="text-small text-red mb-10">
@@ -750,7 +750,7 @@
  
                                     <div class="text-medium text-bold mt-10 text-center">
                                         <span class="w-35 d-inline-block text-left">Inversión Total</span>
-                                        <span class="w-35 d-inline-block text-right">${{ $invoice_price_4 }}</span>
+                                        <span class="w-35 d-inline-block text-right">${{ number_format($invoice_price_4, 2) }}</span>
                                     </div>
 
                                     <div class="w-100 text-center mb-10">
