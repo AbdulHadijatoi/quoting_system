@@ -462,27 +462,27 @@
                         
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Cliente:</div> 
-                            <div class="float-right text-small w-80">{{ $name }}</div>
+                            <div class="float-right text-small w-80 mt-2">{{ $name }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">{{ $dni_ruc_option }}:</div> 
-                            <div class="float-right text-small w-80">{{ $dni_ruc_value }}</div>
+                            <div class="float-right text-small w-80 mt-2">{{ $dni_ruc_value }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Direccion:</div> 
-                            <div class="float-right text-small w-80">{{ $address }}</div>
+                            <div class="float-right text-small w-80 mt-2">{{ $address }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">E-mail:</div> 
-                            <div class="float-right text-small w-80">{{ $email }}</div>
+                            <div class="float-right text-small w-80 mt-2">{{ $email }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Telefono:</div> 
-                            <div class="float-right text-small w-80">{{ $phone }}</div>
+                            <div class="float-right text-small w-80 mt-2">{{ $phone }}</div>
                         </div>
                     </td>
                     <td>
