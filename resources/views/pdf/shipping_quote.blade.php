@@ -525,9 +525,9 @@
                 <div class="float-right w-50">
                     <span class="text-small">{{ $incoterm }}</span><br>
                     <span class="text-small">{{ $form_tab == 1 ? "LCL" : "FCL" }}</span><br>
-                    <span class="text-small">Shanghai</span><br>
-                    <span class="text-small">Maquinaria pesada</span><br>
-                    <span class="text-small">SI</span>
+                    <span class="text-small">{{ $origin_port }}</span><br>
+                    <span class="text-small">{{ {{ $type_of_merchandise }} }}</span><br>
+                    <span class="text-small">{{ $first_import == 1 ? "Yes" : "NO" }}</span>
                 </div>
             </div>
             
@@ -540,11 +540,11 @@
                     <span class="text-bold">Valor de factura</span>
                 </div>
                 <div class="float-right w-50">
-                    <span class="text-small">12 cbm</span><br>
-                    <span class="text-small">5000 kg.</span><br>
+                    <span class="text-small">{{ $volume?$volume.' cbm': '-' }} </span><br>
+                    <span class="text-small">{{ $total_weight?$total_weight.' kg.': '-' }} </span><br>
                     <span class="text-small">Callao</span><br>
-                    <span class="text-small">Av. tomas Valle 2367</span><br>
-                    <span class="text-small">$30,000.00</span>
+                    <span class="text-small">{{ $address }}</span><br>
+                    <span class="text-small">{{ $invoice_price ? '$'.$invoice_price : '-' }}</span>
                 </div>
             </div>
        </div>
@@ -563,9 +563,9 @@
 
                 </div>
                 <div class="float-right w-50">
-                    <span>$ 30,000.00</span><br>
-                    <span>$ 4,500.00</span><br>
-                    <span>$ 197.88</span><br>
+                    <span>${{ $invoice_price }}</span><br>
+                    <span>${{ $shipping_amount }}</span><br>
+                    <span>${{ $seguro }}</span><br>
                 </div>
             </div>
        </div>
@@ -576,7 +576,7 @@
                     <span class="text-bold">Base Imponible</span><br>
                 </div>
                 <div class="float-right w-50">
-                    <span class="text-bold">$34,697.88</span><br>
+                    <span class="text-bold">${{ $total }}</span><br>
                 </div>
             </div>
             
