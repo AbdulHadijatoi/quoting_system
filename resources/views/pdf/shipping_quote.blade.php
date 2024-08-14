@@ -462,27 +462,27 @@
                         
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Cliente:</div> 
-                            <div class="float-right text-small w-80">KODISEO EIRL</div>
+                            <div class="float-right text-small w-80">{{ $name }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
-                            <div class="text-bold float-left w-20">Ruc:</div> 
-                            <div class="float-right text-small w-80">2050887645</div>
+                            <div class="text-bold float-left w-20">{{ $dni_ruc_option }}:</div> 
+                            <div class="float-right text-small w-80">{{ $dni_ruc_value }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Direccion:</div> 
-                            <div class="float-right text-small w-80">AV. UNIVERSITARIA 3466 COMAS</div>
+                            <div class="float-right text-small w-80">{{ $address }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">E-mail:</div> 
-                            <div class="float-right text-small w-80">sergen@gmail.com</div>
+                            <div class="float-right text-small w-80">{{ $email }}</div>
                         </div>
                         <br>
                         <div class="text-medium w-100">
                             <div class="text-bold float-left w-20">Telefono:</div> 
-                            <div class="float-right text-small w-80">987655433</div>
+                            <div class="float-right text-small w-80">{{ $phone }}</div>
                         </div>
                     </td>
                     <td>

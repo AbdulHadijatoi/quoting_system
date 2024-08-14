@@ -169,7 +169,14 @@ class QuoteService {
             // Resumen de Gastos
             "invoice_price_1" => $invoice_price_1,
             "invoice_price_2" => $invoice_price_2,
-            "invoice_price_3" => $invoice_price_3
+            "invoice_price_3" => $invoice_price_3,
+
+            'name' => $data['guest_name'],
+            'email' => $data['guest_email'],
+            'phone' => $data['guest_phone'],
+            'address' => $data['guest_address'],
+            'dni_ruc_option' => $data['dni_ruc_option'],
+            'dni_ruc_value' => $data['dni_or_ruc_value'],
         ];
     }
     
@@ -377,6 +384,13 @@ class QuoteService {
             "invoice_price_1" => $invoice_price_1,
             "invoice_price_2" => $invoice_price_2,
             "invoice_price_3" => $invoice_price_3,
+
+            'name' => $data['guest_name'],
+            'email' => $data['guest_email'],
+            'phone' => $data['guest_phone'],
+            'address' => $data['guest_address'],
+            'dni_ruc_option' => $data['dni_ruc_option'],
+            'dni_ruc_value' => $data['dni_or_ruc_value'],
         ];
     }
 }

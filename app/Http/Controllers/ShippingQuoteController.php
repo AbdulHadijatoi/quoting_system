@@ -161,6 +161,7 @@ class ShippingQuoteController extends BaseController {
             'quote_reference' => $quote_reference,
             'valid_until' => $expiration_date,
             'generated_by_employee' => $user ? 1 : 0, // 
+            'dni_ruc_option' => $request->dni_ruc_option,
             'dni_or_ruc_value' => $request->dni_or_ruc_value,
         ]);
         
