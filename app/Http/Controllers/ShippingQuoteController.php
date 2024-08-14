@@ -11,6 +11,7 @@ use App\Models\Setting;
 use App\Models\ShippingQuote;
 use App\Models\ShippingQuoteDetail;
 use App\Models\Subscriber;
+use App\Services\QuoteService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDF;
@@ -103,6 +104,7 @@ class ShippingQuoteController extends BaseController {
     
     
     public function createShippingQuote(Request $request) {
+        
         $request->validate([
             'guest_name' => 'required',
             'guest_email' => 'required',
@@ -115,26 +117,30 @@ class ShippingQuoteController extends BaseController {
             'total_weight' => 'nullable',
             'invoice_price' => 'nullable',
             'first_import' => 'nullable',
-            'type_of_merchandise' => 'nullable|exists:merchandise_types,id',
+            'type_of_merchandise' => 'nullable|exists:merchandise_types,product_category_id',
+            'type_of_merchandise_id' => 'nullable|exists:merchandise_types,id',
             'origin_port' => 'nullable|exists:origin_ports,code',
             'incoterm' => 'nullable|exists:incoterms,code',
-            'destination_location' => 'nullable|exists:destination_locations,id',
+            'destination_location' => 'nullable|exists:destination_locations,zone_id',
+            'destination_location_id' => 'nullable|exists:destination_locations,id',
             'measurement_unit' => 'nullable|exists:measurement_units,code',
         ]);
 
         $quote_reference = str()->random(8);
 
         $user = auth()->user();
-
+        $form_tab = $request->form_tab;
         $volume = $request->volume;
         $shipping_quote_id = $request->shipping_quote_id;
         $total_weight = $request->total_weight;
         $invoice_price = $request->invoice_price;
         $first_import = $request->first_import;
         $type_of_merchandise = $request->type_of_merchandise;
+        $type_of_merchandise_id = $request->type_of_merchandise_id;
         $origin_port = $request->origin_port;
         $incoterm = $request->incoterm;
         $destination_location = $request->destination_location;
+        $destination_location_id = $request->destination_location_id;
         $measurement_unit = $request->measurement_unit;
 
         $expiration_days = 1;
@@ -144,9 +150,10 @@ class ShippingQuoteController extends BaseController {
         }
 
         $expiration_date = Carbon::now()->addDays($expiration_days);
-
+        
         $createQuote = ShippingQuote::create([
             'user_id' => $user? $user->id : null,
+            'form_tab' => $form_tab,
             'guest_name' => $request->guest_name,
             'guest_email' => $request->guest_email,
             'guest_phone' => $request->guest_phone,
@@ -156,7 +163,7 @@ class ShippingQuoteController extends BaseController {
             'generated_by_employee' => $user ? 1 : 0, // 
             'dni_or_ruc_value' => $request->dni_or_ruc_value,
         ]);
-
+        
         if(!$createQuote){
             return $this->sendError('Failed to send quote, please contact support');
         }
@@ -170,10 +177,10 @@ class ShippingQuoteController extends BaseController {
             'total_weight' => $total_weight,
             'invoice_price' => $invoice_price,
             'first_import' => $first_import,
-            'type_of_merchandise' => $type_of_merchandise,
+            'type_of_merchandise' => $type_of_merchandise_id,
             'origin_port' => $origin_port,
             'incoterm' => $incoterm,
-            'destination_location' => $destination_location,
+            'destination_location' => $destination_location_id,
             'measurement_unit' => $measurement_unit,
         ]);
 
@@ -187,7 +194,13 @@ class ShippingQuoteController extends BaseController {
             ]
         );
 
-        return $this->downloadQuote($request->all());
+        if($form_tab == 1){
+            return (new QuoteService())->applyLCLFormula($request->all());
+        }else if($form_tab == 2){
+            return (new QuoteService())->applyFCLFormula($request->all());
+        }
+        
+        return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
             
         // return $this->sendResponse(['shipping_quote_id' => $shipping_quote_id], 'Succesfully create shipping quote.');
     }

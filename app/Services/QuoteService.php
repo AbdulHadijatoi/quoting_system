@@ -31,8 +31,8 @@ class QuoteService {
                 break;
             }
         }
-    
-        if ($volume  && $total_weight && $invoice_price && $type_of_merchandise && $first_import && $origin_port && $incoterm && $destination_location) {
+
+        if ($volume && $total_weight && $invoice_price && $type_of_merchandise && $first_import && $origin_port && $incoterm && $destination_location) {
             $envio = $volume * 140;
             
             if ($invoice_price <= 13000) {
@@ -126,12 +126,19 @@ class QuoteService {
         $invoice_price_3 = 0;
 
         if ($volume && $total_weight && $invoice_price && $type_of_merchandise && $first_import && $origin_port && $incoterm && $destination_location) {
+
+            $advalorem = (float) $advalorem;
+            $igv = (float) $igv;
+            $ipm = (float) $ipm;
+            $percepcion = (float) $percepcion;
+
+            // Calculate the total with two decimal precision
             $impuesto_total_aduanas = $advalorem + $igv + $ipm + $percepcion;
             
             // Resumen de Gastos
             $invoice_price_1 = number_format($invoice_price, 2);
-            $invoice_price_2 = number_format($impuesto_total_aduanas + $total_final, 2);
-            $invoice_price_3 = number_format($invoice_price + $impuesto_total_aduanas + $total_final, 2);
+            $invoice_price_2 = number_format((float)$impuesto_total_aduanas + (float)$total_final, 2);
+            $invoice_price_3 = number_format((float)$invoice_price + (float)$impuesto_total_aduanas + (float)$total_final, 2);
         
         }
 
@@ -167,7 +174,7 @@ class QuoteService {
     }
     
     public function applyFCLFormula($data){
-            
+  
         $volume = isset($data['volume']) ? floatval($data['volume']) : 0;
         $measurement_unit = isset($data['measurement_unit']) ? $data['measurement_unit'] : '';
         $total_weight = isset($data['total_weight']) ? floatval($data['total_weight']) : 0;
@@ -300,7 +307,7 @@ class QuoteService {
             
             // Resumen de Costos - Containers (FCL)
             $invoice_price = number_format($invoice_price, 2);
-            $shipping_amount = number_format($shipping_amount, 2);
+            // $shipping_amount = number_format($shipping_amount, 2);
             $seguro = number_format($seguro, 2);
             $total = number_format($total, 2);
             
@@ -323,7 +330,7 @@ class QuoteService {
             $precio_almacenaje = number_format($precio_almacenaje, 2);
             $gasto_operativo = number_format($gasto_operativo, 2);
             $vat = (($seguro + $gate_in + $puerto + $handling + $visto_bueno + $shipping_amount2 + $declaracion_aduanera + $precio_almacenaje + $gasto_operativo)*0.18);
-            $grand_total = $shipping_amount + $seguro + $gate_in + $puerto + $handling + $visto_bueno + $shipping_amount2 + $declaracion_aduanera + $precio_almacenaje + $gasto_operativo;
+            $grand_total = (float)$shipping_amount + (float)$seguro + (float)$gate_in + (float)$puerto + (float)$handling + (float)$visto_bueno + (float)$shipping_amount2 + (float)$declaracion_aduanera + (float)$precio_almacenaje + (float)$gasto_operativo;
             $grand_total = number_format($grand_total + $vat, 2);
 
         }   
