@@ -501,7 +501,7 @@
                                 </div>
                                 <div class="float-right">
                                     <div>{{ now()->format("d/m/Y") }}</div>
-                                    <div class="text-red">{{ \Carbon\Carbon::parse($validity)->format('d/m/Y') }}</div>
+                                    <div class="text-red">{{ $expiration_date->format('d/m/Y') }}</div>
                                 </div>
                             </div>
                         </div>
