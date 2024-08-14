@@ -609,7 +609,7 @@
 
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Flete Internacional x tn/m3</span>
-                                    <span class="w-25 d-inline-block text-center">$4,500.00</span>
+                                    <span class="w-25 d-inline-block text-center">${{ $shipping_amount }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Pick Up</span>
@@ -633,42 +633,42 @@
 
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Asesoria en seguro</span>
-                                    <span class="w-25 d-inline-block text-center">$0</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $gate_in }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Handling</span>
-                                    <span class="w-25 d-inline-block text-center">$0</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $puerto }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Descarga x tn.</span>
-                                    <span class="w-25 d-inline-block text-center">$0</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $handling }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Visto Bueno</span>
-                                    <span class="w-25 d-inline-block text-center">$120.00</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $visto_bueno }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Transporte interno</span>
-                                    <span class="w-25 d-inline-block text-center">$180.00</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $shipping_amount2 }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Declaracion de aduana</span>
-                                    <span class="w-25 d-inline-block text-center">$50.00</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $declaracion_aduanera }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Gasto operativo</span>
-                                    <span class="w-25 d-inline-block text-center">$350.00</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $precio_almacenaje }}</span>
                                 </div>
                                 <div class="text-small">
                                     <span class="w-70 d-inline-block">Almacenaje aprox. canal verde</span>
-                                    <span class="w-25 d-inline-block text-center">$330.00</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $gasto_operativo }}</span>
                                 </div>
 
                                 <div class="text-right w-90">
                                     <div class="br-black-1px w-77 mt-2" style="margin-left: auto"></div>
                                 </div>
                                 <div class="text-right w-90">
-                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv $11,070.00</div>
+                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv ${{ $grand_total }}</div>
                                 </div>
                                 <div class="br-black-1px w-100 mt-10 mb-3"></div>
                                 <div class="text-center text-small text-red w-100">
