@@ -82,6 +82,7 @@ class ShippingQuoteController extends BaseController {
                 "quote_reference" => $data->quote_reference,
                 "valid_until" => $data->valid_until,
                 "generated_by_employee" => $data->generated_by_employee,
+                "dni_ruc_option" => $data->dni_ruc_option,
                 "dni_or_ruc_value" => $data->dni_or_ruc_value,
                 "volume" => $detail ? $detail->volume : '',
                 "total_weight" => $detail ? $detail->total_weight : '',
@@ -196,11 +197,11 @@ class ShippingQuoteController extends BaseController {
         );
 
         if($form_tab == 1){
-            return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
-            // return (new QuoteService())->applyLCLFormula($request->all());
+            // return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
+            return (new QuoteService())->applyLCLFormula($request->all());
         }else if($form_tab == 2){
-            return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
-            // return (new QuoteService())->applyFCLFormula($request->all());
+            // return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
+            return (new QuoteService())->applyFCLFormula($request->all());
         }
     }
 
