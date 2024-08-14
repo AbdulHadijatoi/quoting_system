@@ -668,7 +668,7 @@
                                     <div class="br-black-1px w-77 mt-2" style="margin-left: auto"></div>
                                 </div>
                                 <div class="text-right w-90">
-                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv ${{ $grand_total }}</div>
+                                    <div class="w-100 mt-5 mb-4 text-large text-bold" style="margin-left: auto">Total Costos inc. igv ${{ $total_final }}</div>
                                 </div>
                                 <div class="br-black-1px w-100 mt-10 mb-3"></div>
                                 <div class="text-center text-small text-red w-100">
@@ -697,22 +697,22 @@
                                 <div class="text-small mb-5">
                                     <span class="w-50 d-inline-block">Advalorem</span>
                                     <span class="w-20 d-inline-block text-center">6%</span>
-                                    <span class="w-25 d-inline-block text-right">$1,230.00</span>
+                                    <span class="w-25 d-inline-block text-right">${{ $advalorem }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-50 d-inline-block">IGV.</span>
                                     <span class="w-20 d-inline-block text-center">16%</span>
-                                    <span class="w-25 d-inline-block text-right">$1,230.00</span>
+                                    <span class="w-25 d-inline-block text-right">${{ $igv }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-50 d-inline-block">IPM</span>
                                     <span class="w-20 d-inline-block text-center">2%</span>
-                                    <span class="w-25 d-inline-block text-right">$1,230.00</span>
+                                    <span class="w-25 d-inline-block text-right">${{ $ipm }}</span>
                                 </div>
                                 <div class="text-small">
                                     <span class="w-50 d-inline-block">Percepción</span>
                                     <span class="w-20 d-inline-block text-center">3.5%</span>
-                                    <span class="w-25 d-inline-block text-right">$1,230.00</span>
+                                    <span class="w-25 d-inline-block text-right">${{ $percepcion }}</span>
                                 </div>
                                 
                                 
@@ -721,7 +721,7 @@
 
                                 <div class="text-large text-bold mt-10">
                                     <span class="w-60 d-inline-block text-center">Total Impuestos</span>
-                                    <span class="w-35 d-inline-block text-center">$11,070.00</span>
+                                    <span class="w-35 d-inline-block text-center">${{ $impuesto_total_aduanas }}</span>
                                 </div>
                                 
                                 <div class="text-small text-red mb-10">
@@ -734,15 +734,15 @@
 
                                     <div class="text-smaller mb-5 text-center">
                                         <span class="w-30 d-inline-block text-left">Valor de factura</span>
-                                        <span class="w-30 d-inline-block text-right">$ 30,000.00</span>
+                                        <span class="w-30 d-inline-block text-right">$ {{ $invoice_price_1 }}</span>
                                     </div>
                                     <div class="text-smaller mb-5 text-center">
                                         <span class="w-30 d-inline-block text-left">Impuestos Aduana</span>
-                                        <span class="w-30 d-inline-block text-right">$ 11,070.00</span>
+                                        <span class="w-30 d-inline-block text-right">$ {{ $invoice_price_2 }}</span>
                                     </div>
                                     <div class="text-smaller mb-3 text-center">
                                         <span class="w-30 d-inline-block text-left">Costos logisticos</span>
-                                        <span class="w-30 d-inline-block text-right">$ 11,070.00</span>
+                                        <span class="w-30 d-inline-block text-right">$ {{ $invoice_price_3 }}</span>
                                     </div>
 
 
@@ -750,7 +750,7 @@
  
                                     <div class="text-medium text-bold mt-10 text-center">
                                         <span class="w-35 d-inline-block text-left">Inversión Total</span>
-                                        <span class="w-35 d-inline-block text-right">$11,070.00</span>
+                                        <span class="w-35 d-inline-block text-right">${{ (float)$invoice_price_1 +  (float)$invoice_price_2 + (float)$invoice_price_3 }}</span>
                                     </div>
 
                                     <div class="w-100 text-center mb-10">
