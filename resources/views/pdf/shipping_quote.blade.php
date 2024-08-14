@@ -750,7 +750,7 @@
  
                                     <div class="text-medium text-bold mt-10 text-center">
                                         <span class="w-35 d-inline-block text-left">Inversión Total</span>
-                                        <span class="w-35 d-inline-block text-right">${{ (float)$invoice_price_1 +  (float)$invoice_price_2 + (float)$invoice_price_3 }}</span>
+                                        <span class="w-35 d-inline-block text-right">${{ $invoice_price_4 }}</span>
                                     </div>
 
                                     <div class="w-100 text-center mb-10">
