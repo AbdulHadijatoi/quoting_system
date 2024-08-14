@@ -171,6 +171,7 @@ class QuoteService {
             "invoice_price_2" => $invoice_price_2,
             "invoice_price_3" => $invoice_price_3,
 
+            'form_tab' => $data['form_tab'],
             'name' => $data['guest_name'],
             'email' => $data['guest_email'],
             'phone' => $data['guest_phone'],
@@ -396,6 +397,7 @@ class QuoteService {
             "invoice_price_2" => $invoice_price_2,
             "invoice_price_3" => $invoice_price_3,
 
+            'form_tab' => $data['form_tab'],
             'name' => $data['guest_name'],
             'email' => $data['guest_email'],
             'phone' => $data['guest_phone'],
