@@ -633,15 +633,15 @@
 
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Asesoria en seguro</span>
-                                    <span class="w-25 d-inline-block text-center">{{ $gate_in }}</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $seguro_carga }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Handling</span>
-                                    <span class="w-25 d-inline-block text-center">{{ $puerto }}</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $handling }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Descarga x tn.</span>
-                                    <span class="w-25 d-inline-block text-center">{{ $handling }}</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $descarga_tn }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Visto Bueno</span>
@@ -649,7 +649,7 @@
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Transporte interno</span>
-                                    <span class="w-25 d-inline-block text-center">{{ $shipping_amount2 }}</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $shipping_amount }}</span>
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Declaracion de aduana</span>
@@ -657,7 +657,7 @@
                                 </div>
                                 <div class="text-small mb-5">
                                     <span class="w-70 d-inline-block">Gasto operativo</span>
-                                    <span class="w-25 d-inline-block text-center">{{ $precio_almacenaje }}</span>
+                                    <span class="w-25 d-inline-block text-center">{{ $almacenaje }}</span>
                                 </div>
                                 <div class="text-small">
                                     <span class="w-70 d-inline-block">Almacenaje aprox. canal verde</span>
