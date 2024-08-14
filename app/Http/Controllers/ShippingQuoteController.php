@@ -121,9 +121,9 @@ class ShippingQuoteController extends BaseController {
             'type_of_merchandise' => 'nullable|exists:merchandise_types,product_category_id',
             'type_of_merchandise_id' => 'nullable|exists:merchandise_types,id',
             'type_of_merchandise_name' => 'nullable|exists:merchandise_types,name',
-            'origin_port' => 'nullable|exists:origin_ports,code',
+            'origin_port' => 'nullable',
             'origin_port_name' => 'nullable|exists:origin_ports,name',
-            'incoterm' => 'nullable|exists:incoterms,code',
+            'incoterm' => 'nullable',
             'incoterm_name' => 'nullable|exists:incoterms,name',
             'destination_location' => 'nullable|exists:destination_locations,zone_id',
             'destination_location_id' => 'nullable|exists:destination_locations,id',
@@ -131,6 +131,8 @@ class ShippingQuoteController extends BaseController {
             'measurement_unit' => 'nullable|exists:measurement_units,code',
             'measurement_unit_name' => 'nullable|exists:measurement_units,name',
         ]);
+
+
 
         $quote_reference = str()->random(8);
 
@@ -204,11 +206,11 @@ class ShippingQuoteController extends BaseController {
         $request->merge(['validity' => $expiration_date]);
 
         if($form_tab == 1){
-            // return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
-            return (new QuoteService())->applyLCLFormula($request->all());
+            return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
+            // return (new QuoteService())->applyLCLFormula($request->all());
         }else if($form_tab == 2){
-            // return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
-            return (new QuoteService())->applyFCLFormula($request->all());
+            return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
+            // return (new QuoteService())->applyFCLFormula($request->all());
         }
     }
 
