@@ -16,15 +16,15 @@ class ShippingQuoteDetail extends Model
     }
     
     public function getIncoterm(){
-        return $this->belongsTo(Incoterm::class,'incoterm','code');
+        return $this->belongsTo(Incoterm::class,'incoterm');
     }
     
     public function measurementUnit(){
-        return $this->belongsTo(MeasurementUnit::class,'measurement_unit','code');
+        return $this->belongsTo(MeasurementUnit::class,'measurement_unit');
     }
     
     public function originPort(){
-        return $this->belongsTo(OriginPort::class,'origin_port','code');
+        return $this->belongsTo(OriginPort::class,'origin_port');
     }
     
     public function merchandiseType(){
