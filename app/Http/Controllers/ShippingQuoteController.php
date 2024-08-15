@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Mail;
 class ShippingQuoteController extends BaseController {
     
     public $relations = [
-        'shippingQuoteDetails.getIncoterm:id,name,code',
-        'shippingQuoteDetails.measurementUnit:id,name',
-        'shippingQuoteDetails.originPort:id,name,code',
-        'shippingQuoteDetails.merchandiseType:id,name',
-        'shippingQuoteDetails.destinationLocation:id,name',
+        'shippingQuoteDetails.getIncoterm',
+        'shippingQuoteDetails.measurementUnit',
+        'shippingQuoteDetails.originPort',
+        'shippingQuoteDetails.merchandiseType',
+        'shippingQuoteDetails.destinationLocation',
     ];
     
 
@@ -216,11 +216,13 @@ class ShippingQuoteController extends BaseController {
         $getIncoterm = $quoteDetail->getIncoterm;
         $destinationLocation = $quoteDetail->destinationLocation;
         $measurementUnit = $quoteDetail->measurementUnit;
+
         $data = [
             'guest_name' => $quote->guest_name,
             'guest_email' => $quote->guest_email,
             'guest_phone' => $quote->guest_phone,
             'guest_address' => $quote->guest_address,
+            'dni_ruc_option' => $quote->dni_ruc_option,
             'dni_or_ruc_value' => $quote->dni_or_ruc_value,
             'form_tab' => $quote->form_tab,
 
@@ -250,12 +252,12 @@ class ShippingQuoteController extends BaseController {
     public function downloadPDF($quote_id){
         $data = $this->getQuoteDataForPDF($quote_id);
 
-        if($data['form_tab'] == 1){
+        if ($data['form_tab'] == 1){
             return $this->downloadQuote((new QuoteService())->applyLCLFormula($data));
-            // return (new QuoteService())->applyLCLFormula($request->all());
-        }else if($data['form_tab'] == 2){
+            // return (new QuoteService())->applyLCLFormula($data);
+        }else if ($data['form_tab'] == 2){
             return $this->downloadQuote((new QuoteService())->applyFCLFormula($data));
-            // return (new QuoteService())->applyFCLFormula($request->all());
+            // return (new QuoteService())->applyFCLFormula($data);
         }
     }
     
