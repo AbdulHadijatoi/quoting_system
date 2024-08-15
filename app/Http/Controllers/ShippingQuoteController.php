@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Mail;
 class ShippingQuoteController extends BaseController {
     
     public $relations = [
-        'shippingQuoteDetails.getIncoterm:id,name',
+        'shippingQuoteDetails.getIncoterm:id,name,code',
         'shippingQuoteDetails.measurementUnit:id,name',
-        'shippingQuoteDetails.originPort:id,name',
-        'shippingQuoteDetails.merchandiseType:id,name',
+        'shippingQuoteDetails.originPort:id,name,code',
+        'shippingQuoteDetails.merchandiseType:id,name,code',
         'shippingQuoteDetails.destinationLocation:id,name',
     ];
     
@@ -142,11 +142,9 @@ class ShippingQuoteController extends BaseController {
         $total_weight = $request->total_weight;
         $invoice_price = $request->invoice_price;
         $first_import = $request->first_import;
-        $type_of_merchandise = $request->type_of_merchandise;
         $type_of_merchandise_id = $request->type_of_merchandise_id;
         $origin_port = $request->origin_port;
         $incoterm = $request->incoterm;
-        $destination_location = $request->destination_location;
         $destination_location_id = $request->destination_location_id;
         $measurement_unit = $request->measurement_unit;
 
@@ -157,7 +155,7 @@ class ShippingQuoteController extends BaseController {
         }
 
         $expiration_date = Carbon::now()->addDays($expiration_days);
-        
+
         $createQuote = ShippingQuote::create([
             'user_id' => $user? $user->id : null,
             'form_tab' => $form_tab,
@@ -167,7 +165,7 @@ class ShippingQuoteController extends BaseController {
             'guest_address' => $request->guest_address,
             'quote_reference' => $quote_reference,
             'valid_until' => $expiration_date,
-            'generated_by_employee' => $user ? 1 : 0, // 
+            'generated_by_employee' => $user ? 1 : 0, 
             'dni_ruc_option' => $request->dni_ruc_option,
             'dni_or_ruc_value' => $request->dni_or_ruc_value,
         ]);
@@ -178,7 +176,6 @@ class ShippingQuoteController extends BaseController {
 
         $shipping_quote_id = $createQuote->id;
 
-        //NOW CREATE SHIPPING QUOTE DETAILS
         ShippingQuoteDetail::create([
             'volume' => $volume,
             'shipping_quote_id' => $shipping_quote_id,
@@ -192,7 +189,6 @@ class ShippingQuoteController extends BaseController {
             'measurement_unit' => $measurement_unit,
         ]);
 
-        // this will happen only when quote is created
         Subscriber::firstOrCreate(
             ['email' => $request->guest_email],
             [
@@ -202,14 +198,74 @@ class ShippingQuoteController extends BaseController {
             ]
         );
 
-        $request->merge(['validity' => $expiration_date]);
+        return $this->downloadPDF($shipping_quote_id);
+    }
 
-        if($form_tab == 1){
-            return $this->downloadQuote((new QuoteService())->applyLCLFormula($request->all()));
+    public function getQuoteDataForPDF($quote_id){
+
+        $quote = ShippingQuote::with($this->relations)->where('id', $quote_id)->first();
+
+        if(!$quote || !$quote->shippingQuoteDetails){
+            return $this->sendError('Quote details not found!');
+        }
+        
+        $quoteDetail = $quote->shippingQuoteDetails;
+
+        $merchandiseType = $quoteDetail->merchandiseType;
+        $originPort = $quoteDetail->originPort;
+        $getIncoterm = $quoteDetail->getIncoterm;
+        $destinationLocation = $quoteDetail->destinationLocation;
+        $measurementUnit = $quoteDetail->measurementUnit;
+        $data = [
+            'guest_name' => $quote->guest_name,
+            'guest_email' => $quote->guest_email,
+            'guest_phone' => $quote->guest_phone,
+            'guest_address' => $quote->guest_address,
+            'dni_or_ruc_value' => $quote->dni_or_ruc_value,
+            'form_tab' => $quote->form_tab,
+
+            'volume' => $quoteDetail->volume,
+            'total_weight' => $quoteDetail->total_weight,
+            'invoice_price' => $quoteDetail->invoice_price,
+            'first_import' => $quoteDetail->first_import,
+            'type_of_merchandise' => $merchandiseType ? $merchandiseType->product_category_id:'-',
+            'type_of_merchandise_id' => $merchandiseType ? $merchandiseType->id:'-',
+            'type_of_merchandise_name' => $merchandiseType ? $merchandiseType->name:'-',
+            'origin_port' => $quoteDetail->origin_port,
+            'origin_port_name' => $originPort ? $originPort->name : '-',
+            'incoterm' => $quoteDetail->incoterm,
+            'incoterm_name' => $getIncoterm ? $getIncoterm->name : '-',
+            'destination_location' => $quoteDetail->destinationLocation? $quote->destinationLocation->zone_id: '',
+            'destination_location_id' => $destinationLocation ? $destinationLocation->id: '-',
+            'destination_location_name' => $destinationLocation ? $destinationLocation->name: '-',
+            'measurement_unit' => $quoteDetail->measurement_unit,
+            'measurement_unit_name' => $measurementUnit ? $measurementUnit->name: '-',
+            
+            'validity' => $quote->valid_until,
+        ];
+
+        return $data;
+    }
+
+    public function downloadPDF($quote_id){
+        $data = $this->getQuoteDataForPDF($quote_id);
+
+        if($data['form_tab'] == 1){
+            return $this->downloadQuote((new QuoteService())->applyLCLFormula($data));
             // return (new QuoteService())->applyLCLFormula($request->all());
-        }else if($form_tab == 2){
-            return $this->downloadQuote((new QuoteService())->applyFCLFormula($request->all()));
+        }else if($data['form_tab'] == 2){
+            return $this->downloadQuote((new QuoteService())->applyFCLFormula($data));
             // return (new QuoteService())->applyFCLFormula($request->all());
+        }
+    }
+    
+    public function previewPDF($quote_id){
+        $data = $this->getQuoteDataForPDF($quote_id);
+
+        if($data['form_tab'] == 1){
+            return $this->previewQuote((new QuoteService())->applyLCLFormula($data));
+        }else if($data['form_tab'] == 2){
+            return $this->previewQuote((new QuoteService())->applyFCLFormula($data));
         }
     }
 

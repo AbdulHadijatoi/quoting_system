@@ -31,8 +31,8 @@ Route::prefix('shipping-quotes')->group(function(){
     Route::get('/', [ShippingQuoteController::class, 'getShippingQuotes'])->middleware('auth:sanctum');
     Route::post('create', [ShippingQuoteController::class, 'createShippingQuote']);
 
-    Route::any('/preview', [ShippingQuoteController::class, 'previewQuote']);
-    Route::any('/download', [ShippingQuoteController::class, 'downloadQuote']);
+    Route::any('/preview-pdf', [ShippingQuoteController::class, 'previewPDF'])->middleware('auth:sanctum');
+    Route::any('/download-pdf', [ShippingQuoteController::class, 'downloadPDF'])->middleware('auth:sanctum');
 });
 
 Route::get('get-setting/{key?}', [SettingController::class, 'getSetting']);
