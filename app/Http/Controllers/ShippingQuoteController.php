@@ -133,7 +133,6 @@ class ShippingQuoteController extends BaseController {
         ]);
 
 
-
         $quote_reference = str()->random(8);
 
         $user = auth()->user();

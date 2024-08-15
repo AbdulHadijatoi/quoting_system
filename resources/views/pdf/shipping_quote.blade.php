@@ -526,7 +526,7 @@
                     <span class="text-small">{{ $incoterm }}</span><br>
                     <span class="text-small">{{ $form_tab == 1 ? "LCL" : "FCL" }}</span><br>
                     <span class="text-small">{{ $origin_port }}</span><br>
-                    <span class="text-small">{{ $type_of_merchandise }}</span><br>
+                    <span class="text-small">{{ $type_of_merchandise? \Illuminate\Support\Str::limit($type_of_merchandise, 18):'-' }}</span><br>
                     <span class="text-small">{{ $first_import == 1 ? "Yes" : "NO" }}</span>
                 </div>
             </div>
@@ -543,7 +543,7 @@
                     <span class="text-small">{{ $volume?$volume.' cbm': '-' }} </span><br>
                     <span class="text-small">{{ $total_weight?$total_weight.' kg.': '-' }} </span><br>
                     <span class="text-small">Callao</span><br>
-                    <span class="text-small">{{ $address }}</span><br>
+                    <span class="text-small">{{ $address? \Illuminate\Support\Str::limit($address, 18):'-' }}</span><br>
                     <span class="text-small">{{ $invoice_price ? '$'.$invoice_price : '-' }}</span>
                 </div>
             </div>
