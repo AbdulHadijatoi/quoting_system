@@ -23,7 +23,7 @@ class ShippingQuoteController extends BaseController {
         'shippingQuoteDetails.getIncoterm:id,name,code',
         'shippingQuoteDetails.measurementUnit:id,name',
         'shippingQuoteDetails.originPort:id,name,code',
-        'shippingQuoteDetails.merchandiseType:id,name,code',
+        'shippingQuoteDetails.merchandiseType:id,name',
         'shippingQuoteDetails.destinationLocation:id,name',
     ];
     
@@ -235,7 +235,7 @@ class ShippingQuoteController extends BaseController {
             'origin_port_name' => $originPort ? $originPort->name : '-',
             'incoterm' => $quoteDetail->incoterm,
             'incoterm_name' => $getIncoterm ? $getIncoterm->name : '-',
-            'destination_location' => $quoteDetail->destinationLocation? $quote->destinationLocation->zone_id: '',
+            'destination_location' => $destinationLocation ? $destinationLocation->zone_id: '',
             'destination_location_id' => $destinationLocation ? $destinationLocation->id: '-',
             'destination_location_name' => $destinationLocation ? $destinationLocation->name: '-',
             'measurement_unit' => $quoteDetail->measurement_unit,
