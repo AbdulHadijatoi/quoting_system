@@ -326,32 +326,32 @@ class QuoteService {
             $total_final = $total_logistico_con_igv + $flete_internacional;
             
             // Resumen de Costos - Containers (FCL)
-            $invoice_price = number_format($invoice_price, 2);
-            // $shipping_amount = number_format($shipping_amount, 2);
-            $seguro = number_format($seguro, 2);
-            $total = number_format($total, 2);
+            $invoice_price = $invoice_price;
+            // $shipping_amount = $shipping_amount;
+            $seguro = $seguro;
+            $total = $total;
             
             // Impuesto de Aduana
-            $advalorem = number_format($advalorem, 2);
-            $igv = number_format($igv, 2);
-            $ipm = number_format($ipm, 2);
-            $percepcion = number_format($percepcion, 2);
-            $impuesto_total_aduanas = number_format($impuesto_total_aduanas, 2);
+            $advalorem = $advalorem;
+            $igv = $igv;
+            $ipm = $ipm;
+            $percepcion = $percepcion;
+            $impuesto_total_aduanas = $impuesto_total_aduanas;
             
             // Costos Logísticos
-            $shipping_amount = number_format($shipping_amount, 2);
-            $seguro = number_format($seguro, 2);
-            $gate_in = number_format($gate_in, 2);
-            $puerto = number_format($puerto, 2);
-            $handling = number_format($handling, 2);
-            $visto_bueno = number_format($visto_bueno, 2);
-            $shipping_amount2 = number_format($shipping_amount2, 2);
-            $declaracion_aduanera = number_format($declaracion_aduanera, 2);
-            $precio_almacenaje = number_format($precio_almacenaje, 2);
-            $gasto_operativo = number_format($gasto_operativo, 2);
+            $shipping_amount = $shipping_amount;
+            $seguro = $seguro;
+            $gate_in = $gate_in;
+            $puerto = $puerto;
+            $handling = $handling;
+            $visto_bueno = $visto_bueno;
+            $shipping_amount2 = $shipping_amount2;
+            $declaracion_aduanera = $declaracion_aduanera;
+            $precio_almacenaje = $precio_almacenaje;
+            $gasto_operativo = $gasto_operativo;
             $vat = (($seguro + $gate_in + $puerto + $handling + $visto_bueno + $shipping_amount2 + $declaracion_aduanera + $precio_almacenaje + $gasto_operativo)*0.18);
-            $grand_total = (float)$shipping_amount + (float)$seguro + (float)$gate_in + (float)$puerto + (float)$handling + (float)$visto_bueno + (float)$shipping_amount2 + (float)$declaracion_aduanera + (float)$precio_almacenaje + (float)$gasto_operativo;
-            $grand_total = number_format($grand_total + $vat, 2);
+            $grand_total = $shipping_amount + $seguro + $gate_in + $puerto + $handling + $visto_bueno + $shipping_amount2 + $declaracion_aduanera + $precio_almacenaje + $gasto_operativo;
+            $grand_total = $grand_total + $vat;
 
         }   
 
@@ -363,9 +363,9 @@ class QuoteService {
             $impuesto_total_aduanas = $advalorem + $igv + $ipm + $percepcion;
 
             // Resumen de Gastos
-            $invoice_price_1 = number_format($invoice_price, 2);
-            $invoice_price_2 = number_format($impuesto_total_aduanas + $total_final, 2);
-            $invoice_price_3 = number_format($invoice_price + $impuesto_total_aduanas + $total_final, 2);
+            $invoice_price_1 = $invoice_price;
+            $invoice_price_2 = $impuesto_total_aduanas + $total_final;
+            $invoice_price_3 = $invoice_price + $impuesto_total_aduanas + $total_final;
         }
 
         return [
@@ -382,21 +382,22 @@ class QuoteService {
             "impuesto_total_aduanas" => $impuesto_total_aduanas,
             // Costos Logísticos
             "shipping_amount" => $shipping_amount,
-            "seguro" => $seguro,
-            "gate_in" => $gate_in,
+            "seguro_carga" => $seguro,
+            "descarga_tn" => $gate_in,
             "puerto" => $puerto,
             "handling" => $handling,
             "visto_bueno" => $visto_bueno,
-            "shipping_amount2" => $shipping_amount2,
+            "shipping_amount" => $shipping_amount2,
             "declaracion_aduanera" => $declaracion_aduanera,
-            "precio_almacenaje" => $precio_almacenaje,
+            "almacenaje" => $precio_almacenaje,
             "gasto_operativo" => $gasto_operativo,
-            "grand_total" => $grand_total,
+            "total_final" => $grand_total,
 
             // Resumen de Gastos
             "invoice_price_1" => $invoice_price_1,
             "invoice_price_2" => $invoice_price_2,
             "invoice_price_3" => $invoice_price_3,
+            "invoice_price_4" => $invoice_price_1 + $invoice_price_2 + $invoice_price_3,
 
             'form_tab' => $data['form_tab'],
             'name' => $data['guest_name'],
