@@ -542,7 +542,7 @@
                 <div class="float-right w-50">
                     <span class="text-small">{{ $volume?$volume.' cbm': '-' }} </span><br>
                     <span class="text-small">{{ $total_weight?$total_weight.' kg.': '-' }} </span><br>
-                    <span class="text-small">Callao</span><br>
+                    <span class="text-small">-</span><br>
                     <span class="text-small">{{ $address? \Illuminate\Support\Str::limit($address, 18):'-' }}</span><br>
                     <span class="text-small">{{ $invoice_price ? '$'.$invoice_price : '-' }}</span>
                 </div>
