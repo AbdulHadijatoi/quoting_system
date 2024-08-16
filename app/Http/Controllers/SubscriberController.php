@@ -23,6 +23,25 @@ class SubscriberController extends BaseController {
         return $this->sendResponse($getData);
     }
     
+    public function updateSubscriber(Request $request) {
+        $request->validate([
+            'id' => 'required|exists:subscribers,id',
+        ]);
+
+        $subscriber = Subscriber::find($request->id);
+        
+
+        if($subscriber){
+            $subscriber->name = $request->name;
+            $subscriber->email = $request->email;
+            $subscriber->address = $request->address;
+            $subscriber->phone = $request->phone;
+            return $this->sendResponse($subscriber->id, 'Succesfully updated!');
+        }
+
+        return $this->sendError('Failed to add subscriber');
+    }
+
     public function setSubscriber(Request $request) {
         $request->validate([
             'email' => 'required',

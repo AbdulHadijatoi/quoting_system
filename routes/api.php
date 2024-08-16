@@ -14,8 +14,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('get-constants', [ConstantDataController::class, 'getConstants']);
-Route::get('subscribers', [SubscriberController::class, 'getSubscribers'])->middleware('auth:sanctum');
+Route::post('subscribers', [SubscriberController::class, 'getSubscribers'])->middleware('auth:sanctum');
 Route::post('subscribers/create', [SubscriberController::class, 'setSubscriber']);
+Route::post('subscriber/update', [SubscriberController::class, 'updateSubscriber'])->middleware('auth:sanctum');
 
 Route::prefix('constants')->group(function(){
     Route::post('create-incoterm', [ConstantDataController::class, 'setIncoterm']);

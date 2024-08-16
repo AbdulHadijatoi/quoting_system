@@ -81,7 +81,7 @@ class ShippingQuoteController extends BaseController {
                 "guest_address" => $data->guest_address,
                 "quote_reference" => $data->quote_reference,
                 "valid_until" => $data->valid_until,
-                "generated_by_employee" => $data->generated_by_employee,
+                "generated_by_employee" => $data->generated_by_employee == 1? "Yes": "No",
                 "dni_ruc_option" => $data->dni_ruc_option,
                 "dni_or_ruc_value" => $data->dni_or_ruc_value,
                 "volume" => $detail ? $detail->volume : '',
