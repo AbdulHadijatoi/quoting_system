@@ -28,7 +28,7 @@ Route::prefix('constants')->group(function(){
 })->middleware('auth:sanctum');
 
 Route::prefix('shipping-quotes')->group(function(){
-    Route::get('/', [ShippingQuoteController::class, 'getShippingQuotes'])->middleware('auth:sanctum');
+    Route::post('/', [ShippingQuoteController::class, 'getShippingQuotes'])->middleware('auth:sanctum');
     Route::post('create', [ShippingQuoteController::class, 'createShippingQuote']);
 
     Route::any('/preview-pdf', [ShippingQuoteController::class, 'previewPDF'])->middleware('auth:sanctum');
