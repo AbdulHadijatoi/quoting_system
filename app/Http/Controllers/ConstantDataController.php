@@ -68,7 +68,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setDestinationLocation(Request $request) {
+    public function createDestinationLocation(Request $request) {
         $request->validate([
             'name' => 'required',
             'zone_id' => 'required|exists:zones,id',
@@ -100,7 +100,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setIncoterm(Request $request) {
+    public function createIncoterm(Request $request) {
         $request->validate([
             'name' => 'required',
             'code' => 'required'
@@ -132,7 +132,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setMeasurementUnit(Request $request) {
+    public function createMeasurementUnit(Request $request) {
         $request->validate([
             'code' => 'required',
             'name' => 'required'
@@ -165,7 +165,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setMerchandiseType(Request $request) {
+    public function createMerchandiseType(Request $request) {
         $request->validate([
             'name' => 'required',
             'product_category_id' => 'required'
@@ -197,7 +197,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setOriginPort(Request $request) {
+    public function createOriginPort(Request $request) {
         $request->validate([
             'code' => 'required',
             'name' => 'required',
@@ -215,6 +215,29 @@ class ConstantDataController extends BaseController {
         return $this->sendError('Failed to create port of origin');
     }
     
+    public function updateOriginPort(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $data = OriginPort::find($request->id);
+
+        if($data){
+            $data->name = $request->name;
+            $data->code = $request->code;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+        
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+    
     public function getProductCategories(Request $request) {
         $getData = ProductCategory::get();
         
@@ -228,7 +251,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setProductCategory(Request $request) {
+    public function createProductCategory(Request $request) {
         $request->validate([
             'name' => 'required',
         ]);
@@ -257,7 +280,7 @@ class ConstantDataController extends BaseController {
         return $this->sendResponse($getData);
     }
     
-    public function setZone(Request $request) {
+    public function createZone(Request $request) {
         $request->validate([
             'name' => 'required',
         ]);

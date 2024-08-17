@@ -31,13 +31,20 @@ Route::prefix('employees')->group(function(){
 })->middleware('auth:sanctum');
 
 Route::prefix('constants')->group(function(){
-    Route::post('create-incoterm', [ConstantDataController::class, 'setIncoterm']);
-    Route::post('create-measurement-unit', [ConstantDataController::class, 'setMeasurementUnit']);
-    Route::post('create-merchandise-type', [ConstantDataController::class, 'setMerchandiseType']);
-    Route::post('create-destination-location', [ConstantDataController::class, 'setDestinationLocation']);
-    Route::post('create-origin-port', [ConstantDataController::class, 'setOriginPort']);
-    Route::post('create-product-category', [ConstantDataController::class, 'setProductCategory']);
-    Route::post('create-zone', [ConstantDataController::class, 'setZone']);
+    Route::post('create-incoterm', [ConstantDataController::class, 'createIncoterm']);
+    Route::post('update-incoterm', [ConstantDataController::class, 'updateIncoterm']);
+    Route::post('create-measurement-unit', [ConstantDataController::class, 'createMeasurementUnit']);
+    Route::post('update-measurement-unit', [ConstantDataController::class, 'updateMeasurementUnit']);
+    Route::post('create-merchandise-type', [ConstantDataController::class, 'createMerchandiseType']);
+    Route::post('update-merchandise-type', [ConstantDataController::class, 'updateMerchandiseType']);
+    Route::post('create-destination-location', [ConstantDataController::class, 'createDestinationLocation']);
+    Route::post('update-destination-location', [ConstantDataController::class, 'updateDestinationLocation']);
+    Route::post('create-origin-port', [ConstantDataController::class, 'createOriginPort']);
+    Route::post('update-origin-port', [ConstantDataController::class, 'updateOriginPort']);
+    Route::post('create-product-category', [ConstantDataController::class, 'createProductCategory']);
+    Route::post('update-product-category', [ConstantDataController::class, 'updateProductCategory']);
+    Route::post('create-zone', [ConstantDataController::class, 'createZone']);
+    Route::post('update-zone', [ConstantDataController::class, 'updateZone']);
 })->middleware('auth:sanctum');
 
 Route::prefix('shipping-quotes')->group(function(){
