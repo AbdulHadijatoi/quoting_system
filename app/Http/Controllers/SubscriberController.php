@@ -8,9 +8,27 @@ use Illuminate\Http\Request;
 class SubscriberController extends BaseController {
 
     public function getSubscribers(Request $request) {
-        $getData = Subscriber::get();
+        $request->validate([
+            'search' => 'nullable',
+            'perPage' => 'required',
+            'startDate' => 'nullable',
+            'endDate' => 'nullable',
+            'user_id' => 'nullable',
+        ]);
+
+        $search = $request->search;
+        $perPage = $request->perPage;
+    
+
+        $getData = Subscriber::when(!empty($search), function($q) use($search) {
+                        $q->where('email', 'like', "%$search%")
+                        ->orWhere('name', 'like', "%$search%");
+                    })
+                    ->paginate($perPage);
         
-        $getData = $getData->map(function($data){
+        $total = $getData->total();
+        
+        $getData = $getData->getCollection()->map(function($data){
             return [
                 'id' => $data->id,
                 'name' => $data->name,
@@ -20,9 +38,34 @@ class SubscriberController extends BaseController {
             ];
         });
 
-        return $this->sendResponse($getData);
+        return response()->json([
+            'data' => $getData, 
+            'total' => $total
+        ]);
     }
     
+    public function deleteSubscriber(Request $request) {
+        $request->validate([
+            'id' => 'required|exists:subscribers,id',
+        ]);
+
+        $subscriber = Subscriber::find($request->id);
+        
+
+        if($subscriber){
+            $subscriber->delete();
+            return response()->json([
+                'status' => 1,
+                'message' => "Successfully deleted"
+            ]);
+        }
+
+        return response()->json([
+            'status' => 0,
+            'message' => "Subscriber not found",
+        ], 422);
+    }
+
     public function updateSubscriber(Request $request) {
         $request->validate([
             'id' => 'required|exists:subscribers,id',
@@ -36,6 +79,7 @@ class SubscriberController extends BaseController {
             $subscriber->email = $request->email;
             $subscriber->address = $request->address;
             $subscriber->phone = $request->phone;
+            $subscriber->save();
             return $this->sendResponse($subscriber->id, 'Succesfully updated!');
         }
 
