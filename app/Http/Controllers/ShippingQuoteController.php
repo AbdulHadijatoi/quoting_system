@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\QuoteMail;
 use App\Models\DestinationLocation;
 use App\Models\Incoterm;
 use App\Models\MeasurementUnit;
@@ -253,10 +254,10 @@ class ShippingQuoteController extends BaseController {
         $data = $this->getQuoteDataForPDF($quote_id);
 
         if ($data['form_tab'] == 1){
-            return $this->downloadQuote((new QuoteService())->applyLCLFormula($data));
+            return $this->sendQuote((new QuoteService())->applyLCLFormula($data));
             // return (new QuoteService())->applyLCLFormula($data);
         }else if ($data['form_tab'] == 2){
-            return $this->downloadQuote((new QuoteService())->applyFCLFormula($data));
+            return $this->sendQuote((new QuoteService())->applyFCLFormula($data));
             // return (new QuoteService())->applyFCLFormula($data);
         }
     }
@@ -306,6 +307,22 @@ class ShippingQuoteController extends BaseController {
         try {
             $pdf = PDF::loadView('pdf.shipping_quote', $data);
             return $pdf->download('shipping_quote' . now() . '.pdf');
+        } catch (\Exception $e) {
+            // Log the error or handle it appropriately
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function sendQuote($data = [])
+    {
+        try {
+            // Generate the PDF
+            $pdf = PDF::loadView('pdf.shipping_quote', $data)->output();
+
+            // Send the email with the PDF attachment
+            Mail::to($data['email'])->send(new QuoteMail($data, $pdf));
+
+            return response()->json(['message' => 'Email sent successfully.']);
         } catch (\Exception $e) {
             // Log the error or handle it appropriately
             return response()->json(['error' => $e->getMessage()], 500);
