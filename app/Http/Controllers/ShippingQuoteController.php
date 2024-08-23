@@ -199,7 +199,7 @@ class ShippingQuoteController extends BaseController {
             ]
         );
 
-        return $this->downloadPDF($shipping_quote_id);
+        return $this->createPDF($shipping_quote_id);
     }
 
     public function getQuoteDataForPDF($quote_id){
@@ -251,6 +251,18 @@ class ShippingQuoteController extends BaseController {
     }
 
     public function downloadPDF($quote_id){
+        $data = $this->getQuoteDataForPDF($quote_id);
+
+        if ($data['form_tab'] == 1){
+            return $this->downloadQuote((new QuoteService())->applyLCLFormula($data));
+            // return (new QuoteService())->applyLCLFormula($data);
+        }else if ($data['form_tab'] == 2){
+            return $this->downloadQuote((new QuoteService())->applyFCLFormula($data));
+            // return (new QuoteService())->applyFCLFormula($data);
+        }
+    }
+    
+    public function createPDF($quote_id){
         $data = $this->getQuoteDataForPDF($quote_id);
 
         if ($data['form_tab'] == 1){
