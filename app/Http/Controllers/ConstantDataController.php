@@ -295,4 +295,145 @@ class ConstantDataController extends BaseController {
 
         return $this->sendError('Failed to create zone');
     }
+
+    // Update function for DestinationLocation
+    public function updateDestinationLocation(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'zone_id' => 'required|exists:zones,id',
+        ]);
+
+        $data = DestinationLocation::find($request->id);
+
+        if($data){
+            $data->name = $request->name;
+            $data->zone_id = $request->zone_id;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
+    // Update function for Incoterm
+    public function updateIncoterm(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $data = Incoterm::find($request->id);
+
+        if($data){
+            $data->code = $request->code;
+            $data->name = $request->name;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
+    // Update function for MeasurementUnit
+    public function updateMeasurementUnit(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $data = MeasurementUnit::find($request->id);
+
+        if($data){
+            $data->code = $request->code;
+            $data->name = $request->name;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
+    // Update function for MerchandiseType
+    public function updateMerchandiseType(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'product_category_id' => 'required|exists:product_categories,id',
+        ]);
+
+        $data = MerchandiseType::find($request->id);
+
+        if($data){
+            $data->name = $request->name;
+            $data->product_category_id = $request->product_category_id;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
+    // Update function for ProductCategory
+    public function updateProductCategory(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+        ]);
+
+        $data = ProductCategory::find($request->id);
+
+        if($data){
+            $data->name = $request->name;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
+    // Update function for Zone
+    public function updateZone(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+        ]);
+
+        $data = Zone::find($request->id);
+
+        if($data){
+            $data->name = $request->name;
+            $data->save();
+            return response()->json([
+                'message' => "Successfully updated!",
+            ],200);
+        }
+
+        return response()->json([
+            'message' => "Data not found!",
+        ],422);
+    }
+
 }
